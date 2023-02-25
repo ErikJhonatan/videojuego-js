@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Js</title>
+</head>
+<body>
+    <!--Contenedor del Juego-->
+    <div class="game-container">
+        <!--canvas para la generación de graficos dinamicos-->
+        <canvas id="game"></canvas>
+        <!--contenedor de los botones de dezplazamiento del videojuego-->
+        <div class="btns">
+            <button id="up">Arriba</button>
+            <button id="left">Izquierda</button>
+            <button id="right">Derecha</button>
+            <button id="down">Abajo</button>
+        </div>
+        <!--Contendor de la información extra o adicional del videojuego-->
+        <div class="messages">
+            <p>Parrafo de ejemplo</p>
+        </div>
+    </div>
+    <!--Importación de map.js-->
+    <script src="./JavaScript/map.js"></script>
+    <script src="./JavaScript/game.js"></script>
+</body>
+</html>
