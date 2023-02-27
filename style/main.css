@@ -17,7 +17,8 @@ body{
 canvas{
     border:4px solid #EFDE0F;
     border-radius:8px;
-    background-color:#1E1E1E
+    background-color:#1E1E1E;
+    box-shadow: 0 0 10px #efdc0f2e;
 }
 .btns{
     display:flex;
