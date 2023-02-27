@@ -1,14 +1,19 @@
+(() => {
 // Seleccionar el elemento canvas del DOM
 const canvas = document.querySelector('#game');
 
 // Crear el contexto 2D para el canvas
-const game = canvas.getContext('2d');
+const game = canvas?.getContext('2d');
+if (!game || typeof emojis === 'undefined') return;
 
 // Agregar un listener de carga para asegurarse de que todo el documento ha cargado antes de ejecutar la función de inicio
 window.addEventListener('load', setSizeCanvas);
 
 // Agregar un listener de resize para que se ejecute la función resizeCanvas cuando se cambie el tamaño de pantalla
-window.addEventListener('resize', setSizeCanvas)
+let resizeFrame;
+const scheduleResize = () => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(setSizeCanvas); };
+window.addEventListener('resize', scheduleResize);
+window.addEventListener('pagehide', () => { cancelAnimationFrame(resizeFrame); window.removeEventListener('resize', scheduleResize); });
 
 // Declarar una variable let nombrada canvasSize para usarlo en la función startGame 
 let canvasSize;
@@ -21,6 +26,7 @@ function startGame() {
 // Agregar aquí cualquier código necesario para iniciar el juego
 
     // Insertar un texto y bucle para insertarlo en filo o columna
+    game.clearRect(0, 0, canvas.width, canvas.height);
     game.font = elementSize + 'px Verdana';
     game.textAlign = 'end';
     for (let i = 1; i <= 10; i++) {
@@ -49,11 +55,13 @@ function setSizeCanvas() {
     canvas.setAttribute('height', canvasSize);
 
     // asignamos el valor del elementSize para calcular el tamaño de los elementos
-    elementSize = (canvasSize / 10)-2;
+    elementSize = Math.max(1, canvasSize / 10 - 2);
 
     // Mostrar en consola el valor de elementSize
-    console.log({ canvasSize, elementSize });
+
 
     // Inicializamos la función startGame
     startGame();
 }
+
+})();
